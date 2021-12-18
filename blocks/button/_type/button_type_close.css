@@ -1,0 +1,11 @@
+.button_type_close {
+  color: white;
+  font-size: 0;
+  position: absolute;
+  right: 0;
+  top: -36px;
+}
+
+.button_type_close::before {
+  content: url(../../../images/form-close-icon-mobile.svg);
+}

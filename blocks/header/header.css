@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid #545454;
+  padding: 28px 0 32px 27px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 45px 0 40px 0;
+    width: calc(100% - 400px);
+    margin: 0 auto;
+  }
+}

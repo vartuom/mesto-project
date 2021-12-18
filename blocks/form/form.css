@@ -1,0 +1,18 @@
+.form {
+  background-color: white;
+  border-radius: 10px;
+  width: 282px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  padding: 25px 22px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/*
+.form::before {
+  position: absolute;
+  right: 0;
+  top: -36px;
+  content: url(../../images/form-close-icon-mobile.svg);
+  cursor: pointer;
+}

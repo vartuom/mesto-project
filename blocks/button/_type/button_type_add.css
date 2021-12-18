@@ -1,0 +1,26 @@
+.button_type_add {
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.button_type_add::before {
+  display: block;
+  content: url(../../../images/button-plus-icon-mobile.svg);
+  font-size: 0;
+}
+
+@media (min-width: 619px) {
+  .button_type_add {
+    max-width: 150px;
+    justify-content: space-between;
+  }
+}
+
+/*
+  background-image: url(../../../images/button-plus-icon-mobile.svg);
+  background-position: center;
+  background-repeat: no-repeat;
