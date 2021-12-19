@@ -1,10 +1,11 @@
 .header__logo {
-
+  margin: 28px 0 32px 27px;
+  display: block;
+  font-size: 0;
 }
 
-/*
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .header__logo {
-    margin-top: 28px;
+    margin: 45px 0 41px;
   }
 }

@@ -1,88 +1,121 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Путешествия по России</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body class="page">
   <header class="header">
     <picture class="header__logo">
-      <source srcset="./images/header-logo-mobile.svg" media="(min-width: 768px)">
-      <!--ВСТАВИТЬ ЛОГО ДЛЯ ДЕСКТОПА-->
-      <img src="./images/header-logo-mobile.svg" alt="Россия">
+      <source srcset="./images/header-logo-desk.svg" media="(min-width: 767px)">
+      <img src="./images/header-logo-mobile.svg" alt="Логотип Место">
     </picture>
   </header>
   <main class="content">
     <section class="profile">
       <img class="profile__avatar" src="./images/profile-avatar.png" alt="Аватар пользователя">
       <div class="profile__info">
-        <p class="profile__user-name">
+        <h1 class="profile__user-name">
           Жак-Ив Кусто
-          <button class="button button_type_edit"></button>
-        </p>
+          <button class="button button_type_edit" aria-label="Изменить"></button>
+        </h1>
         <p class="profile__user-job">Исследователь океана</p>
       </div>
-      <button class="button button_type_add"></button>
+      <button class="button button_type_add" aria-label="Добавить"></button>
     </section>
     <section class="cards">
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
-      <figure class="card">
-        <img class="card__photo" src="./images/card-karachaevsk.png">
-        <figcaption class="card__caption">
-          Карачаевск
-          <button class="button button_type_like"></button>
-        </figcaption>
-      </figure>
+      <ul class="cards__list">
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-karachaevsk.png" alt="Фото старого здания на фоне гор">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Карачаевск
+              </p>
+              <button class="button card__like card__like_active" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-elbrus.png" alt="Фото горной вершины за линией горизонта">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Гора Эльбрус
+              </p>
+              <button class="button card__like" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-dombai.png" alt="Фото горной вершины в облаках">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Домбай
+              </p>
+              <button class="button card__like" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-elbrus.png" alt="Фото горной вершины за линией горизонта">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Гора Эльбрус
+              </p>
+              <button class="button card__like" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-dombai.png" alt="Фото горной вершины в облаках">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Домбай
+              </p>
+              <button class="button card__like" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="card">
+            <img class="card__photo" src="./images/card-karachaevsk.png" alt="Фото старого здания на фоне гор">
+            <figcaption class="card__caption-wrapper">
+              <p class="card__caption">
+                Карачаево-Черкессия
+              </p>
+              <button class="button card__like" aria-label="Лайк!"></button>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
     </section>
   </main>
-<div class="pop-up">
-  <div class="pop-up__container">
-    <div class="form">
-      <button class="button button_type_close"></button>
-      <h2 class="form__heading">Редактировать профиль</h2>
-      <fieldset class="form__input-container">
-        <input type="text" class="form__input" placeholder="Ваше имя">
-        <input type="text" class="form__input" placeholder="Род деятельности">
-      </fieldset>
-      <button class="button button_type_submit">Сохранить</button>
+  <footer class="footer">
+    <p class="footer__copyright">
+      © 2020 Mesto Russia
+    </p>
+  </footer>
+  <div class="pop-up">
+    <div class="pop-up__container">
+      <button class="button button_type_close" aria-label="Закрыть"></button>
+      <form class="form" name="input-form">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <fieldset class="form__input-container">
+          <input type="text" class="form__input" name="input-user-name" placeholder="Ваше имя">
+          <input type="text" class="form__input" name="input-user-job" placeholder="Род деятельности">
+        </fieldset>
+        <button class="button button_type_submit">Сохранить</button>
+      </form>
     </div>
   </div>
-</div>
 </body>
+
 </html>

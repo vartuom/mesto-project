@@ -1,11 +1,28 @@
 .button_type_close {
   color: white;
-  font-size: 0;
   position: absolute;
   right: 0;
   top: -36px;
 }
 
+.button_type_close:hover {
+  opacity: .6;
+}
+
 .button_type_close::before {
   content: url(../../../images/form-close-icon-mobile.svg);
+  display: block;
+  font-size: 0;
+
+}
+
+@media (min-width: 767px) {
+  .button_type_close {
+    right: -40px;
+    top: -40px;
+  }
+
+  .button_type_close::before {
+    content: url(../../../images/form-close-icon-desk.svg);
+  }
 }

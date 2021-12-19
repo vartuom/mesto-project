@@ -1,9 +1,9 @@
 .profile__info {
-  margin: 36px 0 26px 0;
+  margin: 26px 0 33px;
   text-align: center;
 }
 
-@media (min-width: 619px) {
+@media (min-width: 767px) {
   .profile__info {
     margin: 0 0 0 30px;
     margin-right: auto;

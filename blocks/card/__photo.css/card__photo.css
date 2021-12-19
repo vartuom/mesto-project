@@ -2,17 +2,3 @@
   width: 100%;
   object-fit: cover;
 }
-
-
-/*
-.card__photo::before {
-  position: absolute;
-  display: block;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #C4C4C4;
-  border-radius: 10px 10px 0px 0px;
-}

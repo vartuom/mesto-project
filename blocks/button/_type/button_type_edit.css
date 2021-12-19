@@ -11,6 +11,24 @@
   height: 18px;
 }
 
+.button_type_edit:hover {
+  opacity: .6;
+}
+
 .button_type_edit::before {
   content: url(../../../images/profile-edit-button.svg);
+  display: block;
+  font-size: 0;
+}
+
+@media (min-width: 767px) {
+  .button_type_edit {
+    width: 24px;
+    height: 24px;
+    right: -42px;
+  }
+
+  .button_type_edit::before {
+    content: url(../../../images/profile-edit-button-desk.svg);
+  }
 }

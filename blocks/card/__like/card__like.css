@@ -1,0 +1,14 @@
+.card__like {
+  color: black;
+  margin-left: 32px;
+}
+
+.card__like:hover {
+  opacity: .5;
+}
+
+.card__like::after {
+  content: url(../../../images/card-like.svg);
+  display: block;
+  font-size: 0;
+}

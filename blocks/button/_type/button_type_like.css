@@ -1,9 +1,0 @@
-.button_type_like {
-  color: black;
-  font-size: 0;
-  height: 100%;
-}
-
-.button_type_like::after {
-  content: url(../../../images/card-like.svg);
-}
