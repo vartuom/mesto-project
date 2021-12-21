@@ -1,15 +1,15 @@
-.button_type_close {
+.popup__close-button {
   color: white;
   position: absolute;
   right: 0;
   top: -36px;
 }
 
-.button_type_close:hover {
+.popup__close-button:hover {
   opacity: .6;
 }
 
-.button_type_close::before {
+.popup__close-button::before {
   content: url(../../../images/form-close-icon-mobile.svg);
   display: block;
   font-size: 0;
@@ -17,12 +17,12 @@
 }
 
 @media (min-width: 767px) {
-  .button_type_close {
+  .popup__close-button {
     right: -40px;
     top: -40px;
   }
 
-  .button_type_close::before {
+  .popup__close-button::before {
     content: url(../../../images/form-close-icon-desk.svg);
   }
 }

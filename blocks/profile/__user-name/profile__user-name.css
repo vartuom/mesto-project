@@ -4,6 +4,11 @@
   font-size: 27px;
   line-height: 33px;
   position: relative;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (min-width: 767px) {

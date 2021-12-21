@@ -1,8 +1,12 @@
 .profile__user-job {
-  margin: 6px 0 0 0;
+  margin: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  grid-row-start: 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (min-width: 767px) {

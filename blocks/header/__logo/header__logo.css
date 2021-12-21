@@ -1,11 +1,15 @@
 .header__logo {
-  margin: 28px 0 32px 27px;
+  margin: 28px 0 30px 27px;
   display: block;
   font-size: 0;
+  width: 104px;
+  height: auto;
 }
 
 @media (min-width: 1100px) {
   .header__logo {
     margin: 45px 0 41px;
+    width: 142px;
+    height: auto;
   }
 }

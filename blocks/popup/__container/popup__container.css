@@ -1,4 +1,11 @@
 .popup__container {
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+}
+
+/*
+.popup__container {
   position: absolute;
   top: 50%;
   left: 50%;

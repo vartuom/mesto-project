@@ -1,12 +1,20 @@
 .profile__info {
-  margin: 26px 0 33px;
+  margin: 26px -28px 33px 0;
   text-align: center;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr min-content;
+  row-gap: 8px;
+  column-gap: 10px;
+  max-width: calc(100% - 28px);
 }
 
 @media (min-width: 767px) {
   .profile__info {
-    margin: 0 0 0 30px;
+    margin: 0;
+    padding: 0 30px 0;
     margin-right: auto;
     text-align: left;
+    column-gap: 19px;
   }
 }

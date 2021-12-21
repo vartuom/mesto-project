@@ -1,4 +1,4 @@
-.button_type_submit {
+.form__submit-button {
   border-radius: 2px;
   width: 100%;
   min-height: 46px;
@@ -11,12 +11,12 @@
   text-align: center;
 }
 
-.button_type_submit:hover {
+.form__submit-button:hover {
   opacity: .8;
 }
 
 @media (min-width: 767px) {
-  .button_type_submit {
+  .form__submit-button {
     font-size: 18px;
     line-height: 22px;
     min-height: 50px;
