@@ -32,7 +32,7 @@
     </section>
     <section class="cards">
       <ul class="cards__list">
-        <li>
+        <!-- <li>
           <figure class="card">
             <img class="card__photo" src="./images/card-karachaevsk.png" alt="Фото старого здания на фоне гор">
             <figcaption class="card__caption-wrapper">
@@ -97,7 +97,7 @@
               <button type="button" class="button card__like" aria-label="Лайк!"></button>
             </figcaption>
           </figure>
-        </li>
+        </li> -->
       </ul>
     </section>
   </main>
@@ -119,6 +119,21 @@
       </form>
     </div>
   </div>
+
+  <template id="card-template">
+    <li>
+      <figure class="card">
+        <img class="card__photo" src="" alt="">
+        <figcaption class="card__caption-wrapper">
+          <h2 class="card__caption">
+          </h2>
+          <button type="button" class="button card__like" aria-label="Лайк!"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
