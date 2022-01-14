@@ -43,3 +43,16 @@ function fillCardsContainer(numCards = 6) {
 }
 
 fillCardsContainer();
+
+//popup state manage code block
+const elEditButton = document.querySelector('.profile__edit-button');
+const elPopup = document.querySelector('.popup');
+
+
+function openPopup(el) {
+  el.classList.add('popup_opened');
+}
+
+elEditButton.addEventListener('click', function (){
+  openPopup(elPopup);
+});
