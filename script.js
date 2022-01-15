@@ -1,4 +1,4 @@
-const content = document.querySelector('.content');
+const content = document.querySelector('.page');
 const cardsContainer = content.querySelector('.cards__list');
 
 const cardSamples = [
@@ -25,7 +25,7 @@ const cardSamples = [
 ];
 
 function generateCard() {
-  const cardTemplate = document.querySelector('#card-template').content;
+  const cardTemplate = content.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const randomCardIndex = Math.floor(Math.random()*cardSamples.length);
 
@@ -44,15 +44,31 @@ function fillCardsContainer(numCards = 6) {
 
 fillCardsContainer();
 
-//popup state manage code block
-const elEditButton = document.querySelector('.profile__edit-button');
-const elPopup = document.querySelector('.popup');
-
-
+//popup state manage
+const elPopup = content.querySelector('.popup');
 function openPopup(el) {
   el.classList.add('popup_opened');
 }
 
+const elCloseButton = content.querySelector('.popup__close-button');
+function closePopup(el) {
+  el.classList.remove('popup_opened');
+}
+
+elCloseButton.addEventListener('click', function (){
+  closePopup(elPopup);
+});
+
+
+const elEditButton = content.querySelector('.profile__edit-button');
+const elUserName = content.querySelector('.profile__user-name');
+const elUserJob = content.querySelector('.profile__user-job');
+const elInputName = content.querySelector("form[name='input-form'] input[name='input-user-name']");
+const elInputJob = content.querySelector("form[name='input-form'] input[name='input-user-job']");
+
 elEditButton.addEventListener('click', function (){
   openPopup(elPopup);
+  elInputName.value = elUserName.textContent;
+  elInputJob.value = elUserJob.textContent;
 });
+
