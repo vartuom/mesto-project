@@ -7,6 +7,10 @@ const cardTemplate = content.querySelector('#card-template').content;
 //   evt.target.classList.toggle('card__like_active');
 // };
 
+// function handleImagePopup (src, name) {
+
+// }
+
 const cardSamples = [
   {
     header: 'Карачаевск',
@@ -43,6 +47,15 @@ function generateCard() {
   cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
     evt.target.closest('.card').remove();
   });
+
+  cardElement.querySelector('.card__photo').addEventListener('click', function () {
+    const elImage = elPreviewPopup.querySelector('.preview__image');
+    const elCaption = elPreviewPopup.querySelector('.preview__caption');
+    elImage.src = cardSamples[randomCardIndex].img;
+    elCaption.textContent = cardSamples[randomCardIndex].header;
+    openPopup(elPreviewPopup);
+  });
+
   cardsContainer.append(cardElement);
 }
 
@@ -59,6 +72,7 @@ fillCardsContainer();
 //popup state manage functions
 const elAddPopup = content.querySelector('.popup_type_add');
 const elEditPopup = content.querySelector('.popup_type_edit');
+const elPreviewPopup = content.querySelector('.popup_type_preview');
 function openPopup(el) {
   el.classList.add('popup_opened');
 }
@@ -71,6 +85,7 @@ const elEditButton = content.querySelector('.profile__edit-button');
 const elAddButton = content.querySelector('.profile__add-button');
 const elCloseEditFormButton = content.querySelector('.popup_type_edit .popup__close-button');
 const elCloseAddFormButton = content.querySelector('.popup_type_add .popup__close-button');
+const elClosePreviewButton = content.querySelector('.popup_type_preview .popup__close-button');
 
 
 //button listeners
@@ -88,6 +103,10 @@ elCloseAddFormButton.addEventListener('click', function () {
 });
 elAddButton.addEventListener('click', function () {
   openPopup(elAddPopup);
+});
+
+elClosePreviewButton.addEventListener('click', function () {
+  closePopup(elPreviewPopup);
 });
 
 
