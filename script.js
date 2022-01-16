@@ -1,6 +1,8 @@
 const content = document.querySelector('.page');
 const cardsContainer = content.querySelector('.cards__list');
+const cardTemplate = content.querySelector('#card-template').content;
 
+//initial card generation
 const cardSamples = [
   {
     header: 'Карачаевск',
@@ -25,9 +27,8 @@ const cardSamples = [
 ];
 
 function generateCard() {
-  const cardTemplate = content.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const randomCardIndex = Math.floor(Math.random()*cardSamples.length);
+  const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
 
   cardElement.querySelector('.card__caption').textContent = cardSamples[randomCardIndex].header;
   cardElement.querySelector('.card__photo').src = cardSamples[randomCardIndex].img;
@@ -43,32 +44,79 @@ function fillCardsContainer(numCards = 6) {
 }
 
 fillCardsContainer();
+//initial card generation block END
 
-//popup state manage
-const elPopup = content.querySelector('.popup');
+
+//popup state manage functions
+const elAddPopup = content.querySelector('.popup_type_add');
+const elEditPopup = content.querySelector('.popup_type_edit');
 function openPopup(el) {
   el.classList.add('popup_opened');
 }
-
-const elCloseButton = content.querySelector('.popup__close-button');
 function closePopup(el) {
   el.classList.remove('popup_opened');
 }
 
-elCloseButton.addEventListener('click', function (){
-  closePopup(elPopup);
+//buttons
+const elEditButton = content.querySelector('.profile__edit-button');
+const elAddButton = content.querySelector('.profile__add-button');
+const elCloseEditFormButton = content.querySelector('.popup_type_edit .popup__close-button');
+const elCloseAddFormButton = content.querySelector('.popup_type_add .popup__close-button');
+
+
+//button listeners
+elCloseEditFormButton.addEventListener('click', function () {
+  closePopup(elEditPopup);
+});
+elEditButton.addEventListener('click', function () {
+  openPopup(elEditPopup);
+  elInputName.value = elUserName.textContent;
+  elInputJob.value = elUserJob.textContent;
+});
+
+elCloseAddFormButton.addEventListener('click', function () {
+  closePopup(elAddPopup);
+});
+elAddButton.addEventListener('click', function () {
+  openPopup(elAddPopup);
 });
 
 
-const elEditButton = content.querySelector('.profile__edit-button');
+//text fields
 const elUserName = content.querySelector('.profile__user-name');
 const elUserJob = content.querySelector('.profile__user-job');
 const elInputName = content.querySelector("form[name='input-form'] input[name='input-user-name']");
 const elInputJob = content.querySelector("form[name='input-form'] input[name='input-user-job']");
 
-elEditButton.addEventListener('click', function (){
-  openPopup(elPopup);
-  elInputName.value = elUserName.textContent;
-  elInputJob.value = elUserJob.textContent;
-});
+//edit form submit code block
+const elInputForm = content.querySelector("form[name='input-form']");
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  elUserName.textContent = elInputName.value;
+  elUserJob.textContent = elInputJob.value;
+  closePopup(elEditPopup);
+};
+elInputForm.addEventListener('submit', formSubmitHandler);
+//edit form submit code block END
+
+//add form submit code block
+function addCard (name, url) {
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  cardElement.querySelector('.card__caption').textContent = name;
+  cardElement.querySelector('.card__photo').src = url;
+  cardElement.querySelector('.card__photo').alt = name;
+  cardsContainer.prepend(cardElement);
+}
+
+const elAddForm = content.querySelector("form[name='add-form']");
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  const cardName = content.querySelector("form[name='add-form'] input[name='input-card-name']").value;
+  const cardURL = content.querySelector("form[name='add-form'] input[name='input-card-url']").value;
+  addCard (cardName, cardURL)
+  closePopup(elAddPopup);
+};
+elAddForm.addEventListener('submit', formSubmitHandler);
+//add form submit code block END
+
 
