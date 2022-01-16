@@ -3,6 +3,10 @@ const cardsContainer = content.querySelector('.cards__list');
 const cardTemplate = content.querySelector('#card-template').content;
 
 //initial card generation
+// function handleLike (evt) {
+//   evt.target.classList.toggle('card__like_active');
+// };
+
 const cardSamples = [
   {
     header: 'Карачаевск',
@@ -33,7 +37,12 @@ function generateCard() {
   cardElement.querySelector('.card__caption').textContent = cardSamples[randomCardIndex].header;
   cardElement.querySelector('.card__photo').src = cardSamples[randomCardIndex].img;
   cardElement.querySelector('.card__photo').alt = cardSamples[randomCardIndex].desc;
-
+  cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__like_active');
+  });
+  cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
+    evt.target.closest('.card').remove();
+  });
   cardsContainer.append(cardElement);
 }
 
@@ -89,14 +98,14 @@ const elInputName = content.querySelector("form[name='input-form'] input[name='i
 const elInputJob = content.querySelector("form[name='input-form'] input[name='input-user-job']");
 
 //edit form submit code block
-const elInputForm = content.querySelector("form[name='input-form']");
-function formSubmitHandler(evt) {
+const elInputForm = content.querySelector('.popup_type_edit .form');
+function editFormSubmitHandler(evt) {
   evt.preventDefault();
   elUserName.textContent = elInputName.value;
   elUserJob.textContent = elInputJob.value;
   closePopup(elEditPopup);
 };
-elInputForm.addEventListener('submit', formSubmitHandler);
+elInputForm.addEventListener('submit', editFormSubmitHandler);
 //edit form submit code block END
 
 //add form submit code block
@@ -105,18 +114,21 @@ function addCard (name, url) {
   cardElement.querySelector('.card__caption').textContent = name;
   cardElement.querySelector('.card__photo').src = url;
   cardElement.querySelector('.card__photo').alt = name;
+  cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__like_active');
+  });
   cardsContainer.prepend(cardElement);
 }
-
-const elAddForm = content.querySelector("form[name='add-form']");
-function formSubmitHandler(evt) {
+const elAddForm = content.querySelector('.popup_type_add .form');
+function addFormSubmitHandler(evt) {
   evt.preventDefault();
+  debugger
   const cardName = content.querySelector("form[name='add-form'] input[name='input-card-name']").value;
   const cardURL = content.querySelector("form[name='add-form'] input[name='input-card-url']").value;
-  addCard (cardName, cardURL)
+  addCard (cardName || 'Без имени', cardURL || './images/card-placeholder.png')
   closePopup(elAddPopup);
 };
-elAddForm.addEventListener('submit', formSubmitHandler);
+elAddForm.addEventListener('submit', addFormSubmitHandler);
 //add form submit code block END
 
 
