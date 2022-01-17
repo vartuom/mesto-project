@@ -1,16 +1,3 @@
-const content = document.querySelector('.page');
-const cardsContainer = content.querySelector('.cards__list');
-const cardTemplate = content.querySelector('#card-template').content;
-
-//initial card generation
-// function handleLike (evt) {
-//   evt.target.classList.toggle('card__like_active');
-// };
-
-// function handleImagePopup (src, name) {
-
-// }
-
 const cardSamples = [
   {
     header: 'Карачаевск',
@@ -34,8 +21,71 @@ const cardSamples = [
   }
 ];
 
+//------------------------------ var\const ----------------------------//
+
+//page
+const content = document.querySelector('.page');
+
+//cards
+const elСardsContainer = content.querySelector('.cards__list');
+const elCardTemplate = content.querySelector('#card-template').content;
+
+//text fields
+const elUserName = content.querySelector('.profile__user-name');
+const elUserJob = content.querySelector('.profile__user-job');
+
+//popups
+const elAddPopup = content.querySelector('.popup_type_add');
+const elEditPopup = content.querySelector('.popup_type_edit');
+const elPreviewPopup = content.querySelector('.popup_type_preview');
+
+//buttons
+const elEditButton = content.querySelector('.profile__edit-button');
+const elAddButton = content.querySelector('.profile__add-button');
+const elCloseEditFormButton = content.querySelector('.popup_type_edit .popup__close-button');
+const elCloseAddFormButton = content.querySelector('.popup_type_add .popup__close-button');
+const elClosePreviewButton = content.querySelector('.popup_type_preview .popup__close-button');
+
+//forms
+const elEditForm = content.querySelector('.popup_type_edit .form');
+
+//inputs
+const elInputName = elEditForm.querySelector("input[name='input-user-name']");
+const elInputJob = elEditForm.querySelector("input[name='input-user-job']");
+
+//------------------------------ functions ----------------------------//
+
+//popup state manage functions
+function openPopup(el) {
+  el.classList.add('popup_opened');
+}
+function closePopup(el) {
+  el.classList.remove('popup_opened');
+}
+
+
+function fillCardsContainer(numCards = 6) {
+
+}
+
+
+
+
+
+
+
+
+//initial card generation
+// function handleLike (evt) {
+//   evt.target.classList.toggle('card__like_active');
+// };
+
+// function handleImagePopup (src, name) {
+
+// }
+
 function generateCard() {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardElement = elCardTemplate.querySelector('.card').cloneNode(true);
   const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
 
   cardElement.querySelector('.card__caption').textContent = cardSamples[randomCardIndex].header;
@@ -56,36 +106,23 @@ function generateCard() {
     openPopup(elPreviewPopup);
   });
 
-  cardsContainer.append(cardElement);
+  elСardsContainer.append(cardElement);
 }
 
-function fillCardsContainer(numCards = 6) {
+function fillelСardsContainer(numCards = 6) {
   for (let i = 0; i < numCards; i++) {
     generateCard()
   }
 }
 
-fillCardsContainer();
+fillelСardsContainer();
 //initial card generation block END
 
 
-//popup state manage functions
-const elAddPopup = content.querySelector('.popup_type_add');
-const elEditPopup = content.querySelector('.popup_type_edit');
-const elPreviewPopup = content.querySelector('.popup_type_preview');
-function openPopup(el) {
-  el.classList.add('popup_opened');
-}
-function closePopup(el) {
-  el.classList.remove('popup_opened');
-}
+
 
 //buttons
-const elEditButton = content.querySelector('.profile__edit-button');
-const elAddButton = content.querySelector('.profile__add-button');
-const elCloseEditFormButton = content.querySelector('.popup_type_edit .popup__close-button');
-const elCloseAddFormButton = content.querySelector('.popup_type_add .popup__close-button');
-const elClosePreviewButton = content.querySelector('.popup_type_preview .popup__close-button');
+
 
 
 //button listeners
@@ -110,33 +147,29 @@ elClosePreviewButton.addEventListener('click', function () {
 });
 
 
-//text fields
-const elUserName = content.querySelector('.profile__user-name');
-const elUserJob = content.querySelector('.profile__user-job');
-const elInputName = content.querySelector("form[name='input-form'] input[name='input-user-name']");
-const elInputJob = content.querySelector("form[name='input-form'] input[name='input-user-job']");
+
 
 //edit form submit code block
-const elInputForm = content.querySelector('.popup_type_edit .form');
+
 function editFormSubmitHandler(evt) {
   evt.preventDefault();
   elUserName.textContent = elInputName.value;
   elUserJob.textContent = elInputJob.value;
   closePopup(elEditPopup);
 };
-elInputForm.addEventListener('submit', editFormSubmitHandler);
+elEditForm.addEventListener('submit', editFormSubmitHandler);
 //edit form submit code block END
 
 //add form submit code block
 function addCard (name, url) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardElement = elCardTemplate.querySelector('.card').cloneNode(true);
   cardElement.querySelector('.card__caption').textContent = name;
   cardElement.querySelector('.card__photo').src = url;
   cardElement.querySelector('.card__photo').alt = name;
   cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
   });
-  cardsContainer.prepend(cardElement);
+  elСardsContainer.prepend(cardElement);
 }
 const elAddForm = content.querySelector('.popup_type_add .form');
 function addFormSubmitHandler(evt) {
