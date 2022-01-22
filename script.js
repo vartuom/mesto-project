@@ -18,6 +18,36 @@ const cardSamples = [
     header: 'Карачаево-Черкессия',
     img: './images/card-karachaevsk.png',
     desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Архыз',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Челябинская область',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Иваново',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Камчатка',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Холмогорский район',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    desc: 'Фото старого здания на фоне гор'
+  },
+  {
+    header: 'Байкал',
+    img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    desc: 'Фото старого здания на фоне гор'
   }
 ];
 
@@ -50,10 +80,13 @@ const elClosePreviewButton = content.querySelector('.popup_type_preview .popup__
 
 //forms
 const elEditForm = content.querySelector('.popup_type_edit .form');
+const elAddForm = content.querySelector('.popup_type_add .form');
 
 //inputs
 const elInputName = elEditForm.querySelector("input[name='input-user-name']");
 const elInputJob = elEditForm.querySelector("input[name='input-user-job']");
+const elCardName = elAddForm.querySelector("input[name='input-card-name']");
+const elCardURL = elAddForm.querySelector("input[name='input-card-url']");
 
 //------------------------------ functions ----------------------------//
 
@@ -65,7 +98,7 @@ function closePopup(el) {
   el.classList.remove('popup_opened');
 }
 
-//initial fill cards container by n random cards
+//initial fill cards container by N random cards
 function fillCardsContainer(numCards = 6) {
   for (let i = 0; i < numCards; i++) {
     const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
@@ -93,7 +126,7 @@ function generateCard(name, src, alt) {
     handlePreview(name, src);
   });
 
-  elСardsContainer.append(elCard);
+  elСardsContainer.prepend(elCard);
 }
 
 //preview handling function
@@ -103,62 +136,22 @@ function handlePreview (imgCaption, imgSrc) {
   openPopup(elPreviewPopup);
 }
 
-//initial cards fill on page load
-fillCardsContainer(10);
+//edit form submit handling function
+function editFormSubmitHandler(evt) {
+  evt.preventDefault();
+  elUserName.textContent = elInputName.value;
+  elUserJob.textContent = elInputJob.value;
+  closePopup(elEditPopup);
+};
 
+//add form submit handling function
+function addFormSubmitHandler(evt) {
+  evt.preventDefault();
+  generateCard(elCardName.value || 'Без имени', elCardURL.value || './images/card-placeholder.png', elCardName.value || 'Без описания')
+  closePopup(elAddPopup);
+};
 
-
-
-
-//initial card generation
-// function handleLike (evt) {
-//   evt.target.classList.toggle('card__like_active');
-// };
-
-// function handleImagePopup (src, name) {
-
-// }
-
-// function generateCard() {
-//   const elCard = elCardTemplate.querySelector('.card').cloneNode(true);
-//   const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
-
-//   elCard.querySelector('.card__caption').textContent = cardSamples[randomCardIndex].header;
-//   elCard.querySelector('.card__photo').src = cardSamples[randomCardIndex].img;
-//   elCard.querySelector('.card__photo').alt = cardSamples[randomCardIndex].desc;
-//   elCard.querySelector('.card__like').addEventListener('click', function (evt) {
-//     evt.target.classList.toggle('card__like_active');
-//   });
-//   elCard.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
-//     evt.target.closest('.card').remove();
-//   });
-
-//   elCard.querySelector('.card__photo').addEventListener('click', function () {
-//     elPreviewImage.src = cardSamples[randomCardIndex].img;
-//     elPreviewCaption.textContent = cardSamples[randomCardIndex].header;
-//     openPopup(elPreviewPopup);
-//   });
-
-//   elСardsContainer.append(elCard);
-// }
-
-// function fillelСardsContainer(numCards = 6) {
-//   for (let i = 0; i < numCards; i++) {
-//     generateCard()
-//   }
-// }
-
-// fillelСardsContainer();
-//initial card generation block END
-
-
-
-
-//buttons
-
-
-
-//button listeners
+//------------------------------ listeners ----------------------------//
 elCloseEditFormButton.addEventListener('click', function () {
   closePopup(elEditPopup);
 });
@@ -167,53 +160,19 @@ elEditButton.addEventListener('click', function () {
   elInputName.value = elUserName.textContent;
   elInputJob.value = elUserJob.textContent;
 });
-
 elCloseAddFormButton.addEventListener('click', function () {
   closePopup(elAddPopup);
 });
 elAddButton.addEventListener('click', function () {
   openPopup(elAddPopup);
 });
-
 elClosePreviewButton.addEventListener('click', function () {
   closePopup(elPreviewPopup);
 });
-
-
-
-
-//edit form submit code block
-
-function editFormSubmitHandler(evt) {
-  evt.preventDefault();
-  elUserName.textContent = elInputName.value;
-  elUserJob.textContent = elInputJob.value;
-  closePopup(elEditPopup);
-};
 elEditForm.addEventListener('submit', editFormSubmitHandler);
-//edit form submit code block END
-
-//add form submit code block
-function addCard (name, url) {
-  const elCard = elCardTemplate.querySelector('.card').cloneNode(true);
-  elCard.querySelector('.card__caption').textContent = name;
-  elCard.querySelector('.card__photo').src = url;
-  elCard.querySelector('.card__photo').alt = name;
-  elCard.querySelector('.card__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like_active');
-  });
-  elСardsContainer.prepend(elCard);
-}
-const elAddForm = content.querySelector('.popup_type_add .form');
-function addFormSubmitHandler(evt) {
-  evt.preventDefault();
-  debugger
-  const cardName = content.querySelector("form[name='add-form'] input[name='input-card-name']").value;
-  const cardURL = content.querySelector("form[name='add-form'] input[name='input-card-url']").value;
-  addCard (cardName || 'Без имени', cardURL || './images/card-placeholder.png')
-  closePopup(elAddPopup);
-};
 elAddForm.addEventListener('submit', addFormSubmitHandler);
-//add form submit code block END
 
 
+//------------------------------ execution ----------------------------//
+//initial cards fill on page load
+fillCardsContainer(10);
