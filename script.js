@@ -106,7 +106,7 @@ function fillCardsContainer(numCards = 6) {
     const name = cardSamples[randomCardIndex].header;
     const src = cardSamples[randomCardIndex].img;
     const desc = cardSamples[randomCardIndex].desc;
-    generateCard(name, src, desc)
+    elСardsContainer.prepend(generateCard(name, src, desc));
   }
 }
 
@@ -127,7 +127,7 @@ function generateCard(name, src, alt) {
   elCard.querySelector('.card__photo').addEventListener('click', function () {
     handlePreview(name, src, alt);
   });
-  elСardsContainer.prepend(elCard);
+  return elCard
 }
 
 //preview handling function
@@ -149,7 +149,7 @@ function editFormSubmitHandler(evt) {
 //add form submit handling function
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
-  generateCard(elCardName.value || 'Без имени', elCardURL.value || './images/card-placeholder.png', elCardName.value || 'Без описания')
+  elСardsContainer.prepend(generateCard(elCardName.value || 'Без имени', elCardURL.value || './images/card-placeholder.png', elCardName.value || 'Без описания'));
   closePopup(elAddPopup);
 };
 
