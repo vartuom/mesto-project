@@ -22,32 +22,32 @@ const cardSamples = [
   {
     header: 'Архыз',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Горная гряда'
   },
   {
     header: 'Челябинская область',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Русло реки между заснеженых крутых берегов'
   },
   {
     header: 'Иваново',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Панельные многоэтажки'
   },
   {
     header: 'Камчатка',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Горная вершина на фоне тундры'
   },
   {
     header: 'Холмогорский район',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Железная дорога между деревьев'
   },
   {
     header: 'Байкал',
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    desc: 'Фото старого здания на фоне гор'
+    desc: 'Скалистый берег замерзшего озера'
   }
 ];
 
@@ -68,6 +68,7 @@ const elUserJob = content.querySelector('.profile__user-job');
 const elAddPopup = content.querySelector('.popup_type_add');
 const elEditPopup = content.querySelector('.popup_type_edit');
 const elPreviewPopup = content.querySelector('.popup_type_preview');
+
 const elPreviewImage = elPreviewPopup.querySelector('.preview__image');
 const elPreviewCaption = elPreviewPopup.querySelector('.preview__caption');
 
@@ -104,7 +105,8 @@ function fillCardsContainer(numCards = 6) {
     const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
     const name = cardSamples[randomCardIndex].header;
     const src = cardSamples[randomCardIndex].img;
-    generateCard(name, src, name)
+    const desc = cardSamples[randomCardIndex].desc;
+    generateCard(name, src, desc)
   }
 }
 
@@ -123,16 +125,16 @@ function generateCard(name, src, alt) {
     evt.target.closest('.card').remove();
   });
   elCard.querySelector('.card__photo').addEventListener('click', function () {
-    handlePreview(name, src);
+    handlePreview(name, src, alt);
   });
-
   elСardsContainer.prepend(elCard);
 }
 
 //preview handling function
-function handlePreview (imgCaption, imgSrc) {
-  elPreviewImage.src = imgSrc;
-  elPreviewCaption.textContent = imgCaption;
+function handlePreview (name, src, alt) {
+  elPreviewImage.src = src;
+  elPreviewCaption.textContent = name;
+  elPreviewImage.alt = alt;
   openPopup(elPreviewPopup);
 }
 
@@ -175,4 +177,4 @@ elAddForm.addEventListener('submit', addFormSubmitHandler);
 
 //------------------------------ execution ----------------------------//
 //initial cards fill on page load
-fillCardsContainer(10);
+fillCardsContainer();
