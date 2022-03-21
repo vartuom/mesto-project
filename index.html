@@ -104,8 +104,8 @@
       <form class="form" name="input-form">
         <h2 class="form__heading">Редактировать профиль</h2>
         <fieldset class="form__input-container">
-          <input type="text" class="form__input" name="input-user-name" placeholder="Ваше имя">
-          <input type="text" class="form__input" name="input-user-job" placeholder="Род деятельности">
+          <input type="text" class="form__input" name="input-user-name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+          <input type="text" class="form__input" name="input-user-job" placeholder="Род деятельности" minlength="2" maxlength="200" required>
         </fieldset>
         <button type="submit" class="button form__submit-button">Сохранить</button>
       </form>
