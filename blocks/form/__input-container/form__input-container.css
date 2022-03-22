@@ -2,6 +2,9 @@
   margin: 75px 0 45px;
   padding: 0;
   border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 @media (min-width: 767px) {

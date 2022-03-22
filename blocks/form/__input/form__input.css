@@ -7,7 +7,7 @@
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  margin: 0 0 30px;
+  margin: 0;
 }
 
 .form__input:invalid {
@@ -17,10 +17,6 @@
 .form__input:focus {
   outline-offset: 4px;
   outline-color: #fff6c5;
-}
-
-.form__input:last-child {
-  margin: 0;
 }
 
 .form__input::placeholder {

@@ -104,8 +104,14 @@
       <form class="form" name="input-form">
         <h2 class="form__heading">Редактировать профиль</h2>
         <fieldset class="form__input-container">
-          <input type="text" class="form__input" name="input-user-name" placeholder="Ваше имя" minlength="2" maxlength="40" required>
-          <input type="text" class="form__input" name="input-user-job" placeholder="Род деятельности" minlength="2" maxlength="200" required>
+          <label class="form__field">
+            <input type="text" class="form__input" name="input-user-name" id="user-name-input" placeholder="Ваше имя" minlength="2" maxlength="40" required>
+            <span class="form__input-error form__input-error_active user-name-input-error">Ошибка</span>
+          </label>
+          <label class="form__field">
+            <input type="text" class="form__input" name="input-user-job" id="user-info-input" placeholder="Род деятельности" minlength="2" maxlength="200" required>
+            <span class="form__input-error form__input-error_active user-info-input-error">Ошибка</span>
+          </label>
         </fieldset>
         <button type="submit" class="button form__submit-button">Сохранить</button>
       </form>
@@ -118,8 +124,12 @@
       <form class="form" name="add-form">
         <h2 class="form__heading">Новое место</h2>
         <fieldset class="form__input-container">
-          <input type="text" class="form__input" name="input-card-name" placeholder="Название">
-          <input type="text" class="form__input" name="input-card-url" placeholder="Ссылка на картинку">
+          <label class="form__field">
+            <input type="text" class="form__input" name="input-card-name" placeholder="Название">
+          </label>
+          <label class="form__field">
+            <input type="text" class="form__input" name="input-card-url" placeholder="Ссылка на картинку">
+          </label>
         </fieldset>
         <button type="submit" class="button form__submit-button">Сохранить</button>
       </form>
