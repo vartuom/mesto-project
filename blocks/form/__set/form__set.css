@@ -1,14 +1,14 @@
-.form__input-container {
+.form__set {
   margin: 75px 0 45px;
   padding: 0;
   border: 0;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 38px; /*был 30px*/
 }
 
 @media (min-width: 767px) {
-  .form__input-container {
+  .form__set {
     margin: 48px 0 48px;
   }
 }

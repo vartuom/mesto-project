@@ -57,46 +57,50 @@ const cardSamples = [
 const content = document.querySelector('.page');
 
 //cards
-const elСardsContainer = content.querySelector('.cards__list');
-const elCardTemplate = content.querySelector('#card-template').content;
+const cardsContainerElement = content.querySelector('.cards__list');
+const cardTemplateElement = content.querySelector('#card-template').content;
 
 //text fields
-const elUserName = content.querySelector('.profile__user-name');
-const elUserJob = content.querySelector('.profile__user-job');
+const userNameElement = content.querySelector('.profile__user-name');
+const userJobElement = content.querySelector('.profile__user-job');
 
 //popups
-const elAddPopup = content.querySelector('.popup_type_add');
-const elEditPopup = content.querySelector('.popup_type_edit');
-const elPreviewPopup = content.querySelector('.popup_type_preview');
+const addPopupElement = content.querySelector('.popup_type_add');
+const editPopupElement = content.querySelector('.popup_type_edit');
+const previewPopupElement = content.querySelector('.popup_type_preview');
 
-const elPreviewImage = elPreviewPopup.querySelector('.preview__image');
-const elPreviewCaption = elPreviewPopup.querySelector('.preview__caption');
+const previewImageElement = previewPopupElement.querySelector('.preview__image');
+const previewCaptionElement = previewPopupElement.querySelector('.preview__caption');
 
 //buttons
-const elEditButton = content.querySelector('.profile__edit-button');
-const elAddButton = content.querySelector('.profile__add-button');
-const elCloseEditFormButton = content.querySelector('.popup_type_edit .popup__close-button');
-const elCloseAddFormButton = content.querySelector('.popup_type_add .popup__close-button');
-const elClosePreviewButton = content.querySelector('.popup_type_preview .popup__close-button');
+const editButtonElement = content.querySelector('.profile__edit-button');
+const addButtonElement = content.querySelector('.profile__add-button');
+const closeEditFormButtonElement = content.querySelector('.popup_type_edit .popup__close-button');
+const closeAddFormButtonElement = content.querySelector('.popup_type_add .popup__close-button');
+const closePreviewButtonElement = content.querySelector('.popup_type_preview .popup__close-button');
 
 //forms
-const elEditForm = content.querySelector('.popup_type_edit .form');
-const elAddForm = content.querySelector('.popup_type_add .form');
+const editFormElement = content.querySelector('.popup_type_edit .form');
+const addFormElement = content.querySelector('.popup_type_add .form');
 
 //inputs
-const elInputName = elEditForm.querySelector("input[name='input-user-name']");
-const elInputJob = elEditForm.querySelector("input[name='input-user-job']");
-const elCardName = elAddForm.querySelector("input[name='input-card-name']");
-const elCardURL = elAddForm.querySelector("input[name='input-card-url']");
+const inputNameElement = editFormElement.querySelector("input[name='input-user-name']");
+const inputJobElement = editFormElement.querySelector("input[name='input-user-job']");
+const cardNameElement = addFormElement.querySelector("input[name='input-card-name']");
+const cardURLElement = addFormElement.querySelector("input[name='input-card-url']");
 
 //------------------------------ functions ----------------------------//
 
 //popup state manage functions
-function openPopup(el) {
-  el.classList.add('popup_opened');
+function openPopup(element) {
+  element.classList.add('popup_opened');
+  const innerFormElement = element.querySelector('.form');
+  if (!element.classList.contains('popup_type_preview')) {
+    resetValidationErrors(innerFormElement);
+  }
 }
-function closePopup(el) {
-  el.classList.remove('popup_opened');
+function closePopup(element) {
+  element.classList.remove('popup_opened');
 }
 
 //initial fill cards container by N random cards
@@ -106,51 +110,51 @@ function fillCardsContainer(numCards = 6) {
     const name = cardSamples[randomCardIndex].header;
     const src = cardSamples[randomCardIndex].img;
     const desc = cardSamples[randomCardIndex].desc;
-    elСardsContainer.prepend(generateCard(name, src, desc));
+    cardsContainerElement.prepend(generateCard(name, src, desc));
   }
 }
 
 //card gen function
 function generateCard(name, src, alt) {
-  const elCard = elCardTemplate.querySelector('.card').cloneNode(true);
-  const elCardPhoto = elCard.querySelector('.card__photo');
-  elCardPhoto.src = src;
-  elCardPhoto.alt = alt;
-  elCard.querySelector('.card__caption').textContent = name;
+  const cardElement = cardTemplateElement.querySelector('.card').cloneNode(true);
+  const cardPhotoElement = cardElement.querySelector('.card__photo');
+  cardPhotoElement.src = src;
+  cardPhotoElement.alt = alt;
+  cardElement.querySelector('.card__caption').textContent = name;
 
-  elCard.querySelector('.card__like').addEventListener('click', function (evt) {
+  cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
   });
-  elCard.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
+  cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
     evt.target.closest('.card').remove();
   });
-  elCard.querySelector('.card__photo').addEventListener('click', function () {
+  cardElement.querySelector('.card__photo').addEventListener('click', function () {
     handlePreview(name, src, alt);
   });
-  return elCard
+  return cardElement
 }
 
 //preview handling function
 function handlePreview (name, src, alt) {
-  elPreviewImage.src = src;
-  elPreviewCaption.textContent = name;
-  elPreviewImage.alt = alt;
-  openPopup(elPreviewPopup);
+  previewImageElement.src = src;
+  previewCaptionElement.textContent = name;
+  previewImageElement.alt = alt;
+  openPopup(previewPopupElement);
 }
 
 //edit form submit handling function
 function editFormSubmitHandler(evt) {
   evt.preventDefault();
-  elUserName.textContent = elInputName.value;
-  elUserJob.textContent = elInputJob.value;
-  closePopup(elEditPopup);
+  userNameElement.textContent = inputNameElement.value;
+  userJobElement.textContent = inputJobElement.value;
+  closePopup(editPopupElement);
 };
 
 //add form submit handling function
 function addFormSubmitHandler(evt) {
   evt.preventDefault();
-  elСardsContainer.prepend(generateCard(elCardName.value || 'Без имени', elCardURL.value || './images/card-placeholder.png', elCardName.value || 'Без описания'));
-  closePopup(elAddPopup);
+  cardsContainerElement.prepend(generateCard(cardNameElement.value || 'Без имени', cardURLElement.value || './images/card-placeholder.png', cardNameElement.value || 'Без описания'));
+  closePopup(addPopupElement);
 };
 
 const enableValidation = () => {
@@ -185,23 +189,25 @@ const checkInputValidity = (formElement, inputElement) => {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__input_type_error');
+  // inputElement.classList.add('form__input_type_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('form__input-error_active');
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__input_type_error');
+  // inputElement.classList.remove('form__input_type_error');
   errorElement.classList.remove('form__input-error_active');
   errorElement.textContent = '';
 };
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('button_inactive');
+    buttonElement.classList.add('form__submit-button_inactive');
+    buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove('button_inactive');
+    buttonElement.classList.remove('form__submit-button_inactive');
+    buttonElement.disabled = false;
   }
 }
 
@@ -215,28 +221,52 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
+const resetValidationErrors = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  const buttonElement = formElement.querySelector('.form__submit-button');
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement);
+  });
+}
+
 //------------------------------ listeners ----------------------------//
-elCloseEditFormButton.addEventListener('click', function () {
-  closePopup(elEditPopup);
+closeEditFormButtonElement.addEventListener('click', function () {
+  closePopup(editPopupElement);
 });
-elEditButton.addEventListener('click', function () {
-  openPopup(elEditPopup);
-  elInputName.value = elUserName.textContent;
-  elInputJob.value = elUserJob.textContent;
+editButtonElement.addEventListener('click', function () {
+  inputNameElement.value = userNameElement.textContent;
+  inputJobElement.value = userJobElement.textContent;
+  openPopup(editPopupElement);
 });
-elCloseAddFormButton.addEventListener('click', function () {
-  closePopup(elAddPopup);
+closeAddFormButtonElement.addEventListener('click', function () {
+  closePopup(addPopupElement);
 });
-elAddButton.addEventListener('click', function () {
-  openPopup(elAddPopup);
+addButtonElement.addEventListener('click', function () {
+  addFormElement.reset();
+  openPopup(addPopupElement);
 });
-elClosePreviewButton.addEventListener('click', function () {
-  closePopup(elPreviewPopup);
+closePreviewButtonElement.addEventListener('click', function () {
+  closePopup(previewPopupElement);
 });
-elEditForm.addEventListener('submit', editFormSubmitHandler);
-elAddForm.addEventListener('submit', addFormSubmitHandler);
+editFormElement.addEventListener('submit', editFormSubmitHandler);
+addFormElement.addEventListener('submit', addFormSubmitHandler);
 
+document.addEventListener('mousedown', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+})
 
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    const currentPopup = document.querySelector('.popup_opened');
+    if (currentPopup) {
+      closePopup(currentPopup);
+    }
+  }
+});
 //------------------------------ execution ----------------------------//
 //initial cards fill on page load
 fillCardsContainer();
+enableValidation();
