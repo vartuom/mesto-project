@@ -10,10 +10,6 @@
   margin: 0;
 }
 
-.form__input:invalid {
-  border-bottom: 1px solid #FF0000;
-}
-
 .form__input:focus {
   outline-offset: 4px;
   outline-color: #fff6c5;
