@@ -1,7 +1,14 @@
 //popup state manage functions
 import {resetValidationErrors} from "./validate.js";
+import {content} from "./utils.js";
+let activePopup;
+
+const modalContainer = content.querySelector('.popup_type_preview');
+const imageElement = modalContainer.querySelector('.preview__image');
+const captionElement = modalContainer.querySelector('.preview__caption');
 
 function openPopup(element) {
+  activePopup = element;
   element.classList.add('popup_opened');
   handleCloseButton(element);
   const innerFormElement = element.querySelector('.form');
@@ -9,21 +16,22 @@ function openPopup(element) {
     resetValidationErrors(innerFormElement);
   }
 }
+
 function closePopup() {
-  const currentPopup = document.querySelector('.popup_opened');
-  if (currentPopup) {
-    currentPopup.classList.remove('popup_opened');
-  }
+    activePopup.classList.remove('popup_opened');
 }
 
-function handleCloseButton (currentPopup) {
-  const closeButtonElement = currentPopup.querySelector('.popup__close-button');
+function handleCloseButton (element) {
+  const closeButtonElement = element.querySelector('.popup__close-button');
   closeButtonElement.addEventListener('click', closePopup)
 }
 
-export {openPopup, closePopup};
+//preview handling function
+function handlePreview (name, src, alt) {
+  imageElement.src = src;
+  imageElement.alt = alt;
+  captionElement.textContent = name;
+  openPopup(modalContainer);
+}
 
-/*
-function closePopup(element) {
-  element.classList.remove('popup_opened');
-}*/
+export {openPopup, closePopup, handlePreview};

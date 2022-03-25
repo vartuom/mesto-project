@@ -53,11 +53,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 const hasInvalidInput = (inputList) => {
-  // проходим по этому массиву методом some
   return inputList.some((inputElement) => {
-    // Если поле не валидно, колбэк вернёт true
-    // Обход массива прекратится и вся фунцкция
-    // hasInvalidInput вернёт true
     return !inputElement.validity.valid;
   })
 };
