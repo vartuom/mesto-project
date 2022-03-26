@@ -5,6 +5,7 @@ import {enableValidation} from "./validate.js";
 import {openPopup, closePopup} from "./modal.js";
 import {generateCard, fillCardsContainer} from "./card.js";
 import {content} from "./utils.js";
+import {validationConfig} from "./utils.js";
 
 //cards
 const cardsContainerElement = content.querySelector('.cards__list');
@@ -60,12 +61,10 @@ document.addEventListener('mousedown', function (evt) {
 })
 
 document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    closePopup();
-  }
+
 });
 
 //------------------------------ execution ----------------------------//
 //initial cards fill on page load
 fillCardsContainer(cardsContainerElement);
-enableValidation();
+enableValidation(validationConfig);
