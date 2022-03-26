@@ -1,26 +1,29 @@
 //page
 export const content = document.querySelector('.page');
 
+import karachaevskImage from '../images/card-karachaevsk.png';
+import elbrusImage from '../images/card-elbrus.png';
+import dombaiImage from '../images/card-dombai.png';
 
 export const cardSamples = [
   {
     header: 'Карачаевск',
-    img: './images/card-karachaevsk.png',
+    img: karachaevskImage,
     desc: 'Фото старого здания на фоне гор'
   },
   {
     header: 'Гора Эльбрус',
-    img: './images/card-elbrus.png',
+    img: elbrusImage,
     desc: 'Фото горной вершины за линией горизонта'
   },
   {
     header: 'Домбай',
-    img: './images/card-dombai.png',
+    img: dombaiImage,
     desc: 'Фото горной вершины в облаках'
   },
   {
     header: 'Карачаево-Черкессия',
-    img: './images/card-karachaevsk.png',
+    img: karachaevskImage,
     desc: 'Фото старого здания на фоне гор'
   },
   {
