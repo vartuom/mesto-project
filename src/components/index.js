@@ -7,7 +7,7 @@ import {generateCard, fillCardsContainer} from "./card.js";
 import {content} from "./utils.js";
 import {validationConfig} from "./utils.js";
 
-//cards
+//cards container
 const cardsContainerElement = content.querySelector('.cards__list');
 
 //text fields
@@ -59,10 +59,6 @@ document.addEventListener('mousedown', function (evt) {
     closePopup();
   }
 })
-
-document.addEventListener('keydown', function (evt) {
-
-});
 
 //------------------------------ execution ----------------------------//
 //initial cards fill on page load

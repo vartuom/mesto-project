@@ -29,7 +29,6 @@ function handleCloseButton (element) {
   closeButtonElement.addEventListener('click', closePopup)
 }
 
-
 //preview handling function
 function handlePreview (name, src, alt) {
   imageElement.src = src;
