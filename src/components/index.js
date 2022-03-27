@@ -43,7 +43,7 @@ editFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   userNameElement.textContent = evt.target.elements.userName.value;
   userJobElement.textContent = evt.target.elements.userInfo.value;
-  closePopup();
+  closePopup(editPopupElement);
 });
 
 addFormElement.addEventListener('submit', (evt) => {
@@ -51,14 +51,8 @@ addFormElement.addEventListener('submit', (evt) => {
   const cardName = evt.target.elements.cardName.value;
   const cardUrl = evt.target.elements.cardUrl.value;
   cardsContainerElement.prepend(generateCard(cardName, cardUrl, cardName));
-  closePopup();
+  closePopup(addPopupElement);
 });
-
-document.addEventListener('mousedown', function (evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup();
-  }
-})
 
 //------------------------------ execution ----------------------------//
 //initial cards fill on page load

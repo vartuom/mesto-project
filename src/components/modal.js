@@ -2,32 +2,37 @@
 import {resetValidationErrors} from "./validate.js";
 import {content} from "./utils.js";
 import {validationConfig} from "./utils.js";
-let activePopup;
 
+const popups = document.querySelectorAll('.popup')
 const modalContainer = content.querySelector('.popup_type_preview');
 const imageElement = modalContainer.querySelector('.preview__image');
 const captionElement = modalContainer.querySelector('.preview__caption');
 
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup)
+    }
+  })
+})
+
 function openPopup(element) {
-  activePopup = element;
   document.addEventListener('keydown', handleEscapeKeypress);
   element.classList.add('popup_opened');
-  handleCloseButton(element);
-  const innerFormElement = element.querySelector('.form');
-  if (!element.classList.contains('popup_type_preview')) {
+  const innerFormElement = element.querySelector(validationConfig.formSelector);
+  if (innerFormElement) {
     resetValidationErrors(validationConfig, innerFormElement);
   }
 }
 
-function closePopup() {
-    activePopup.classList.remove('popup_opened');
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handleEscapeKeypress);
 }
 
-function handleCloseButton (element) {
-  const closeButtonElement = element.querySelector('.popup__close-button');
-  closeButtonElement.addEventListener('click', closePopup)
-}
 
 //preview handling function
 function handlePreview (name, src, alt) {
@@ -39,7 +44,8 @@ function handlePreview (name, src, alt) {
 
 function handleEscapeKeypress(evt) {
   if (evt.key === 'Escape') {
-    closePopup();
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
