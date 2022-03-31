@@ -1,7 +1,7 @@
 //------------------------------ imports ----------------------------//
 import '../pages/index.css';
 
-import {enableValidation} from "./validate.js";
+import {enableValidation, resetValidationErrors} from "./validate.js";
 import {openPopup, closePopup} from "./modal.js";
 import {generateCard, fillCardsContainer} from "./card.js";
 import {content} from "./utils.js";
@@ -32,11 +32,13 @@ editButtonElement.addEventListener('click', () => {
   form.elements.userName.value = userNameElement.textContent;
   form.elements.userInfo.value = userJobElement.textContent;
   openPopup(editPopupElement);
+  resetValidationErrors(validationConfig, editPopupElement);
 });
 
 addButtonElement.addEventListener('click', function () {
   addFormElement.reset();
   openPopup(addPopupElement);
+  resetValidationErrors(validationConfig, addPopupElement);
 });
 
 editFormElement.addEventListener('submit', (evt) => {

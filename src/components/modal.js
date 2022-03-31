@@ -22,10 +22,6 @@ popups.forEach((popup) => {
 function openPopup(element) {
   document.addEventListener('keydown', handleEscapeKeypress);
   element.classList.add('popup_opened');
-  const innerFormElement = element.querySelector(validationConfig.formSelector);
-  if (innerFormElement) {
-    resetValidationErrors(validationConfig, innerFormElement);
-  }
 }
 
 function closePopup(popup) {
