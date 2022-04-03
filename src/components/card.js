@@ -1,32 +1,74 @@
 import {content, cardSamples} from "./utils.js";
 import {handlePreview} from "./modal.js";
+import {getAllCards, deleteCard, addLike, removeLike} from "./api";
 
 const cardTemplateElement = content.querySelector('#card-template').content;
 
 //initial fill cards container by N random cards
-function fillCardsContainer(containerElement, numCards = 6) {
-  for (let i = 0; i < numCards; i++) {
-    const randomCardIndex = Math.floor(Math.random() * cardSamples.length);
-    const name = cardSamples[randomCardIndex].header;
-    const src = cardSamples[randomCardIndex].img;
-    const desc = cardSamples[randomCardIndex].desc;
-    containerElement.prepend(generateCard(name, src, desc));
-  }
+function fillCardsContainer(containerElement, userId, numCards = 6) {
+  getAllCards()
+    .then((cardSamples) => {
+      console.log(cardSamples);
+      for (let i = Object.keys(cardSamples).length-1; i >= 0; i--) {
+        const name = cardSamples[i].name;
+        const src = cardSamples[i].link;
+        const desc = cardSamples[i].name;
+        const likesCount = cardSamples[i].likes.length;
+        const isOwner = (userId == cardSamples[i].owner._id) ? true : false;
+        const isLiked = (cardSamples[i].likes.some((el) => el._id === userId)) ? true : false;
+        console.log(userId);
+        console.log(cardSamples[i].owner._id);
+        console.log(isOwner);
+        const cardId = cardSamples[i]._id;
+        containerElement.prepend(generateCard(name, src, desc, likesCount, isOwner, cardId, isLiked));
+      }
+    })
+    .catch((err) => console.log(err))
 }
 
 //card gen function
-function generateCard(name, src, alt) {
+function generateCard(name, src, alt, likesCount, isOwner, cardId, isLiked) {
   const cardElement = cardTemplateElement.querySelector('.card').cloneNode(true);
   const cardPhotoElement = cardElement.querySelector('.card__photo');
+  const cardLikesCounterElement = cardElement.querySelector('.card__like-counter');
   cardPhotoElement.src = src;
   cardPhotoElement.alt = alt;
+  cardLikesCounterElement.innerText = likesCount;
   cardElement.querySelector('.card__caption').textContent = name;
+  if (isLiked) {
+    const cardLikeButton = cardElement.querySelector('.card__like');
+    cardLikeButton.classList.add('card__like_active');
+  }
   cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like_active');
+    if (!evt.target.classList.contains('card__like_active')) {
+      addLike(cardId)
+        .then((res) => {
+          cardLikesCounterElement.innerText = res.likes.length;
+          evt.target.classList.add('card__like_active');
+        })
+        .catch((err) => console.log(err));
+    } else {
+      removeLike(cardId)
+        .then((res) => {
+          cardLikesCounterElement.innerText = res.likes.length;
+          evt.target.classList.remove('card__like_active');
+        })
+        .catch((err) => console.log(err));
+    }
   });
-  cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
-    evt.target.closest('.card').remove();
-  });
+
+  if (isOwner) {
+    cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
+      deleteCard(cardId)
+        .then((res => {
+          console.log(res);
+          evt.target.closest('.card').remove();
+        }))
+        .catch((err) => console.log(err));
+    });
+  } else {
+    cardElement.querySelector('.card__bin-icon').classList.add('card__bin-icon_disabled');
+  }
   cardElement.querySelector('.card__photo').addEventListener('click', function () {
     handlePreview(name, src, alt);
   });

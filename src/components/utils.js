@@ -14,7 +14,7 @@ export const validationConfig = {
   errorClass: 'form__input-error_active'
 }
 
-export const cardSamples = [
+/*export const cardSamples = [
   {
     header: 'Карачаевск',
     img: karachaevskImage,
@@ -65,5 +65,5 @@ export const cardSamples = [
     img: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
     desc: 'Скалистый берег замерзшего озера'
   }
-];
+];*/
 
