@@ -1,7 +1,5 @@
 //popup state manage functions
-import {resetValidationErrors} from "./validate.js";
-import {content} from "./utils.js";
-import {validationConfig} from "./utils.js";
+import {content} from "./constants.js";
 
 const popups = document.querySelectorAll('.popup')
 const modalContainer = content.querySelector('.popup_type_preview');

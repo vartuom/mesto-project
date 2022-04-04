@@ -4,8 +4,7 @@ import '../pages/index.css';
 import {enableValidation, resetValidationErrors} from "./validate.js";
 import {openPopup, closePopup} from "./modal.js";
 import {generateCard, fillCardsContainer} from "./card.js";
-import {content} from "./utils.js";
-import {validationConfig} from "./utils.js";
+import {content, validationConfig} from "./constants.js";
 import {getUserInfo, setUserInfo, addCard, setAvatar} from "./api";
 
 //------------------------------ var\const ----------------------------//
@@ -37,7 +36,6 @@ const editAvatarFormElement = content.querySelector('.popup_type_avatar .form');
 
 editButtonElement.addEventListener('click', () => {
   const form = document.forms.editForm;
-  form.elements.submitButton.innerText = 'Сохранить';
   form.elements.userName.value = userNameElement.textContent;
   form.elements.userInfo.value = userJobElement.textContent;
   openPopup(editPopupElement);
@@ -46,14 +44,12 @@ editButtonElement.addEventListener('click', () => {
 
 addButtonElement.addEventListener('click', function () {
   addFormElement.reset();
-  addFormElement.elements.submitButton.innerText = 'Сохранить';
   openPopup(addPopupElement);
   resetValidationErrors(validationConfig, addPopupElement);
 });
 
 editAvatarButtonElement.addEventListener('click', function () {
   editAvatarFormElement.reset();
-  addFormElement.elements.submitButton.innerText = 'Сохранить';
   openPopup(editAvatarPopupElement);
   resetValidationErrors(validationConfig, editAvatarPopupElement);
 });
@@ -65,11 +61,11 @@ editFormElement.addEventListener('submit', (evt) => {
     .then((res) => {
       userNameElement.textContent = res.name;
       userJobElement.textContent = res.about;
+      closePopup(editPopupElement);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      editFormElement.elements.submitButton.innerText = 'Готово!';
-      closePopup(editPopupElement);
+      editFormElement.elements.submitButton.innerText = 'Сохранить';
   });
 });
 
@@ -79,11 +75,11 @@ addFormElement.addEventListener('submit', (evt) => {
   addCard(evt.target.elements.cardName.value, evt.target.elements.cardUrl.value)
     .then((res) => {
       cardsContainerElement.prepend(generateCard(res.name, res.link, res.name, res.likes.length, true, res._id, false));
+      closePopup(addPopupElement);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      addFormElement.elements.submitButton.innerText = 'Готово!';
-      closePopup(addPopupElement);
+      addFormElement.elements.submitButton.innerText = 'Сохранить';
     });
 });
 
@@ -93,11 +89,11 @@ editAvatarFormElement.addEventListener('submit', (evt) => {
   setAvatar(evt.target.elements.avatarUrl.value)
     .then((res) => {
       userAvatarElement.src = res.avatar;
+      closePopup(editAvatarPopupElement);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      editAvatarFormElement.elements.submitButton.innerText = 'Готово!';
-      closePopup(editAvatarPopupElement);
+      editAvatarFormElement.elements.submitButton.innerText = 'Сохранить';
     });
 });
 

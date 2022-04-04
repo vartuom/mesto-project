@@ -1,4 +1,4 @@
-import {content} from "./utils.js";
+import {content} from "./constants.js";
 import {handlePreview} from "./modal.js";
 import {getAllCards, deleteCard, addLike, removeLike} from "./api";
 

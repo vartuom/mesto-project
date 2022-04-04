@@ -7,26 +7,31 @@ function handleResponse(res) {
   }
 }
 
+const config ={
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-8',
+  headers: 'Doe'
+}
+
 export function getAllCards() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-8/cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
     }
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function getUserInfo() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-8/users/me', {
+  return fetch(`${config.baseUrl}/users/me`, {
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
     }
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function setUserInfo(name, about) {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-8/users/me', {
+  return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
@@ -37,11 +42,11 @@ export function setUserInfo(name, about) {
       about: about
     })
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function addCard(name, link) {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-8/cards', {
+  return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
@@ -52,41 +57,41 @@ export function addCard(name, link) {
       link: link
     })
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function deleteCard(cardId) {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort-8/cards/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function addLike(cardId) {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort-8/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function removeLike(cardId) {
-  return fetch(`https://nomoreparties.co/v1/plus-cohort-8/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
 
 export function setAvatar(link) {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-8/users/me/avatar', {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
@@ -96,5 +101,6 @@ export function setAvatar(link) {
       avatar: link
     })
   })
-    .then(res => handleResponse(res))
+    .then(handleResponse)
 }
+

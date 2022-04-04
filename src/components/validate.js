@@ -62,9 +62,18 @@ const resetValidationErrors = (validationConfig, formElement) => {
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   toggleButtonState(validationConfig, inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    checkInputValidity(validationConfig, formElement, inputElement);
+    hideInputError(validationConfig, formElement, inputElement);
   });
 }
+
+/*const resetValidationErrors = (validationConfig, formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  toggleButtonState(validationConfig, inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    checkInputValidity(validationConfig, formElement, inputElement);
+  });
+}*/
 
 
 export {enableValidation, resetValidationErrors};
