@@ -1,9 +1,9 @@
 
-function handleResponce(res) {
+function handleResponse(res) {
   if (res.ok) {
     return res.json();
   } else {
-    Promise.reject(res);
+    Promise.reject(`Ошибка: ${res.status}`);
   }
 }
 
@@ -13,7 +13,7 @@ export function getAllCards() {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
     }
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function getUserInfo() {
@@ -22,7 +22,7 @@ export function getUserInfo() {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
     }
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function setUserInfo(name, about) {
@@ -37,7 +37,7 @@ export function setUserInfo(name, about) {
       about: about
     })
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function addCard(name, link) {
@@ -52,7 +52,7 @@ export function addCard(name, link) {
       link: link
     })
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function deleteCard(cardId) {
@@ -62,7 +62,7 @@ export function deleteCard(cardId) {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function addLike(cardId) {
@@ -72,7 +72,7 @@ export function addLike(cardId) {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function removeLike(cardId) {
@@ -82,7 +82,7 @@ export function removeLike(cardId) {
       authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
     }
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }
 
 export function setAvatar(link) {
@@ -96,5 +96,5 @@ export function setAvatar(link) {
       avatar: link
     })
   })
-    .then(res => handleResponce(res))
+    .then(res => handleResponse(res))
 }

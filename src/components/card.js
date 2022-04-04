@@ -1,14 +1,13 @@
-import {content, cardSamples} from "./utils.js";
+import {content} from "./utils.js";
 import {handlePreview} from "./modal.js";
 import {getAllCards, deleteCard, addLike, removeLike} from "./api";
 
 const cardTemplateElement = content.querySelector('#card-template').content;
 
 //initial fill cards container by N random cards
-function fillCardsContainer(containerElement, userId, numCards = 6) {
+function fillCardsContainer(containerElement, userId) {
   getAllCards()
     .then((cardSamples) => {
-      console.log(cardSamples);
       for (let i = Object.keys(cardSamples).length-1; i >= 0; i--) {
         const name = cardSamples[i].name;
         const src = cardSamples[i].link;
@@ -16,9 +15,6 @@ function fillCardsContainer(containerElement, userId, numCards = 6) {
         const likesCount = cardSamples[i].likes.length;
         const isOwner = (userId == cardSamples[i].owner._id) ? true : false;
         const isLiked = (cardSamples[i].likes.some((el) => el._id === userId)) ? true : false;
-        console.log(userId);
-        console.log(cardSamples[i].owner._id);
-        console.log(isOwner);
         const cardId = cardSamples[i]._id;
         containerElement.prepend(generateCard(name, src, desc, likesCount, isOwner, cardId, isLiked));
       }
@@ -56,14 +52,12 @@ function generateCard(name, src, alt, likesCount, isOwner, cardId, isLiked) {
         .catch((err) => console.log(err));
     }
   });
-
   if (isOwner) {
     cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
       deleteCard(cardId)
-        .then((res => {
-          console.log(res);
+        .then(() => {
           evt.target.closest('.card').remove();
-        }))
+        })
         .catch((err) => console.log(err));
     });
   } else {
