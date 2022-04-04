@@ -18,15 +18,14 @@ popups.forEach((popup) => {
 })
 
 function openPopup(element) {
-  document.addEventListener('keydown', handleEscapeKeypress);
+  document.addEventListener('keydown', handleEscapeKey);
   element.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', handleEscapeKeypress);
+    document.removeEventListener('keydown', handleEscapeKey);
 }
-
 
 //preview handling function
 function handlePreview (name, src, alt) {
@@ -36,7 +35,7 @@ function handlePreview (name, src, alt) {
   openPopup(modalContainer);
 }
 
-function handleEscapeKeypress(evt) {
+function handleEscapeKey(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);

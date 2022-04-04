@@ -52,8 +52,9 @@ function generateCard(name, src, alt, likesCount, isOwner, cardId, isLiked) {
         .catch((err) => console.log(err));
     }
   });
+  const cardBinIconElement = cardElement.querySelector('.card__bin-icon');
   if (isOwner) {
-    cardElement.querySelector('.card__bin-icon').addEventListener('click', function (evt) {
+    cardBinIconElement.addEventListener('click', function (evt) {
       deleteCard(cardId)
         .then(() => {
           evt.target.closest('.card').remove();
@@ -61,9 +62,9 @@ function generateCard(name, src, alt, likesCount, isOwner, cardId, isLiked) {
         .catch((err) => console.log(err));
     });
   } else {
-    cardElement.querySelector('.card__bin-icon').classList.add('card__bin-icon_disabled');
+    cardBinIconElement.classList.add('card__bin-icon_disabled');
   }
-  cardElement.querySelector('.card__photo').addEventListener('click', function () {
+  cardPhotoElement.addEventListener('click', function () {
     handlePreview(name, src, alt);
   });
   return cardElement
