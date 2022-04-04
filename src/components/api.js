@@ -9,23 +9,22 @@ function handleResponse(res) {
 
 const config ={
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-8',
-  headers: 'Doe'
+  headers: {
+    authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
+    'Content-Type': 'application/json'
+  }
 }
 
 export function getAllCards() {
   return fetch(`${config.baseUrl}/cards`, {
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
-    }
+    headers: config.headers
   })
     .then(handleResponse)
 }
 
 export function getUserInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762'
-    }
+    headers: config.headers
   })
     .then(handleResponse)
 }
@@ -33,10 +32,7 @@ export function getUserInfo() {
 export function setUserInfo(name, about) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: name,
       about: about
@@ -48,10 +44,7 @@ export function setUserInfo(name, about) {
 export function addCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: name,
       link: link
@@ -63,9 +56,7 @@ export function addCard(name, link) {
 export function deleteCard(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-    }
+    headers: config.headers
   })
     .then(handleResponse)
 }
@@ -73,9 +64,7 @@ export function deleteCard(cardId) {
 export function addLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-    }
+    headers: config.headers
   })
     .then(handleResponse)
 }
@@ -83,9 +72,7 @@ export function addLike(cardId) {
 export function removeLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-    }
+    headers: config.headers
   })
     .then(handleResponse)
 }
@@ -93,10 +80,7 @@ export function removeLike(cardId) {
 export function setAvatar(link) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
-    headers: {
-      authorization: '6556f7bd-6f48-4334-a44b-f6f6033ed762',
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       avatar: link
     })

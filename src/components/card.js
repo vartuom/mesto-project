@@ -31,11 +31,11 @@ function generateCard(name, src, alt, likesCount, isOwner, cardId, isLiked) {
   cardPhotoElement.alt = alt;
   cardLikesCounterElement.innerText = likesCount;
   cardElement.querySelector('.card__caption').textContent = name;
+  const cardLikeButton = cardElement.querySelector('.card__like');
   if (isLiked) {
-    const cardLikeButton = cardElement.querySelector('.card__like');
     cardLikeButton.classList.add('card__like_active');
   }
-  cardElement.querySelector('.card__like').addEventListener('click', function (evt) {
+  cardLikeButton.addEventListener('click', function (evt) {
     if (!evt.target.classList.contains('card__like_active')) {
       addLike(cardId)
         .then((res) => {
